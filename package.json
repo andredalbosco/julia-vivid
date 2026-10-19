@@ -1,0 +1,120 @@
+{
+  "name": "julia-vivid",
+  "version": "0.1.0",
+  "description": "Distinct Julia colors for parameters, fields, function calls, types, constants, and macros — with your existing theme.",
+  "main": "./dist/extension.js",
+  "scripts": {
+    "build": "esbuild src/extension.js --bundle --platform=node --target=node18 --external:vscode --outfile=dist/extension.js",
+    "test": "node --test test/highlight.test.js",
+    "test:editor": "node test/run-editor.js",
+    "vscode:prepublish": "npm run build",
+    "package": "vsce package --no-dependencies"
+  },
+  "keywords": [
+    "julia",
+    "syntax",
+    "highlighting",
+    "colors",
+    "pluto"
+  ],
+  "author": "André Dal Bosco",
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "@vscode/test-electron": "3.1.0",
+    "@vscode/vsce": "4.0.0",
+    "esbuild": "0.28.2",
+    "playwright-core": "1.64.1"
+  },
+  "dependencies": {
+    "@plutojl/lezer-julia": "1.2.0"
+  },
+  "displayName": "Julia Vivid",
+  "publisher": "andredalbosco",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "activationEvents": [
+    "onLanguage:julia"
+  ],
+  "extensionDependencies": [
+    "julialang.language-julia"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andredalbosco/julia-vivid.git"
+  },
+  "homepage": "https://github.com/andredalbosco/julia-vivid#readme",
+  "bugs": {
+    "url": "https://github.com/andredalbosco/julia-vivid/issues"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "juliaVivid.toggle",
+        "title": "Julia Vivid: Toggle Highlighting"
+      }
+    ],
+    "configuration": {
+      "title": "Julia Vivid",
+      "properties": {
+        "juliaVivid.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Apply vivid colors to Julia identifiers."
+        },
+        "juliaVivid.maxFileSize": {
+          "type": "number",
+          "default": 1000000,
+          "minimum": 0,
+          "description": "Skip files larger than this many UTF-16 code units to keep the editor responsive."
+        },
+        "juliaVivid.colors.parameter": {
+          "type": "string",
+          "default": "#FFB454",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "description": "Color for Julia parameter identifiers.",
+          "scope": "window"
+        },
+        "juliaVivid.colors.property": {
+          "type": "string",
+          "default": "#73DACA",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "description": "Color for Julia property identifiers.",
+          "scope": "window"
+        },
+        "juliaVivid.colors.function": {
+          "type": "string",
+          "default": "#C099FF",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "description": "Color for Julia function identifiers.",
+          "scope": "window"
+        },
+        "juliaVivid.colors.type": {
+          "type": "string",
+          "default": "#2EE6D6",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "description": "Color for Julia type identifiers.",
+          "scope": "window"
+        },
+        "juliaVivid.colors.constant": {
+          "type": "string",
+          "default": "#82CFFF",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "description": "Color for Julia constant identifiers.",
+          "scope": "window"
+        },
+        "juliaVivid.colors.macro": {
+          "type": "string",
+          "default": "#F78CDA",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "description": "Color for Julia macro identifiers.",
+          "scope": "window"
+        }
+      }
+    }
+  }
+}
